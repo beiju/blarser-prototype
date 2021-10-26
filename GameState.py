@@ -925,6 +925,16 @@ class GameState:
         # There is nothing to do but copy over the description
         self.game_update['lastUpdate'] = feed_event['description']
 
+    def update_coffee_bean(self, feed_event: dict, _: Optional[dict]):
+        assert self.expects_pitch  # we'll see if this holds
+
+        parsed = Parsers.coffee_bean.parse(feed_event['description'])
+
+        (bean_player_name, bean_flavor), (mod_player_name, mod_name) = parsed
+        assert bean_player_name == mod_player_name
+
+        pass
+
 
 GameState.update_type = {
     0: GameState.update_lets_go,
@@ -945,6 +955,7 @@ GameState.update_type = {
     25: GameState.update_strike_zapped,
     27: GameState.update_mild_pitch,
     28: GameState.update_inning_end,
+    39: GameState.update_coffee_bean,
     52: GameState.update_blooddrain,
     73: GameState.update_no_state_change_pitch,  # Peanut flavor text
     92: GameState.update_no_state_change_batter_up,  # Superyummy

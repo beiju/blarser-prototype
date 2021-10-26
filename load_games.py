@@ -1,9 +1,16 @@
 from collections import defaultdict
 from itertools import groupby
 
+import requests_cache
 from blaseball_mike import chronicler, eventually
+from blaseball_mike.session import _SESSIONS_BY_EXPIRY
 
 from GameState import GameState
+
+session = requests_cache.CachedSession("blaseball_mike_cache",
+                                       backend="sqlite", expire_after=None)
+_SESSIONS_BY_EXPIRY[None] = session
+_SESSIONS_BY_EXPIRY[5] = session
 
 
 def assert_updates_equivalent(tester: 'TestAllGames', actual, generated):
@@ -21,7 +28,7 @@ def flatten(t):
     return [item for sublist in t for item in sublist]
 
 
-def get_game(tester, game_id):
+def test_game(tester, game_id):
     print("Fetching game updates...")
     game_updates_by_play = defaultdict(lambda: [])
     for game_update in chronicler.get_game_updates(game_ids=game_id, lazy=True,

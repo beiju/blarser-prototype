@@ -18,6 +18,7 @@ class Parsers:
     mild_pitch = _make_parser('mild_pitch')
     strikeout = _make_parser('strikeout')
     blooddrain = _make_parser('blooddrain')
+    coffee_bean = _make_parser('coffee_bean')
 
     def __init__(self):
         raise RuntimeError("This class should not be instantiated")

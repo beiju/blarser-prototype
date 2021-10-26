@@ -1,0 +1,7 @@
+This should be split into a GameParser and a GameTransformer. GameParser should
+produce an AST of the game and GameTransformer should turn that back into a list
+of game events. The tester should verify that the GameTransformer's output is
+exactly equal to the input feed events.
+
+Although the end goal is to output ASTs for a whole game, it would probably be
+best to start with one event at a time to catch errors sooner.

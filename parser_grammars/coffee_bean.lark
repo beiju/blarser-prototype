@@ -1,0 +1,11 @@
+start: bean _N (gained_coffee_mod | lost_coffee_mod)
+
+bean: NAME " is Beaned by a " NAME
+
+gained_coffee_mod: NAME " is " COFFEE_MOD_NAME "!"
+lost_coffee_mod: NAME " is no longer " COFFEE_MOD_NAME "!"
+
+COFFEE_MOD_NAME: "Wired" | "Tired"
+
+%import .blaseball.NAME
+%import .blaseball._N
